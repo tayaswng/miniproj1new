@@ -7,10 +7,11 @@ void encrypt(char *original){
     int len = strlen(original);
     int arr[len];
 
+    //open new file to write the ecrypted text to
     FILE *fp;
-    fp = fopen("C:/Users/Taya/Desktop/CCode/git/miniproj1new/encrypted.txt", "w+");
+    fp = fopen("C:/Users/Taya/Desktop/CCode/git/miniproj1new/encrypted.crp", "w+");
 
-    //creat an array of the ascii numbers for each input character
+    //create an array of the ascii numbers for each input character
     for (i=0; i<len; i++)
     {
         int asciinum = original[i];
@@ -28,16 +29,24 @@ void encrypt(char *original){
         if (outChar<32){
             outChar = (outChar-32)+144;
         }
-        //create an array of the resulting outChars and print to a file
-        arr[i] = outChar;
-        fprintf(fp, "%2x", arr[i]);
+        //print resulting outChars to a file
+        fprintf(fp, "%2X", outChar);
     }
-    fclose(fp);
+
+    fclose(fp); 
 }
 
-void main(){
-    char original[] = "Hello There how are you?";
-    encrypt(original);
+
+
+int main(FILE *fp){
+
+    char fileinput[255];
+    fp = fopen("C:/Users/Taya/Desktop/CCode/git/miniproj1new/testdoc.txt", "r");
+    fgets(fileinput, 255, (FILE*)fp);
+
+    encrypt(fileinput);
+
+    return 0;
 }
 
 
