@@ -17,7 +17,6 @@ void encrypt(char original[120], char *writefile){
     {
         int asciinum = original[i];
         arr[i] = asciinum;
-        printf("original ascii: %d\n", arr[i]);
     }
 
     //subtracts 16 from the ascii value
@@ -28,14 +27,15 @@ void encrypt(char original[120], char *writefile){
         if (outChar<32){
             outChar = (outChar-32)+144;
         }
-        
+
         arr[i] = outChar;
+
+        //detects if there is a carriage return, and creates a new line in the file instead of writing it 
         if(arr[i] == 106){
-            printf("newline\n");
             fputs("\n", fp);
         }
+        
         else{
-            printf("outchar: %2X\n", arr[i]);
             fprintf(fp, "%2X", outChar);
         }
     }
@@ -54,11 +54,8 @@ void cryptoMagic (char input[], char fname[]){
     char basename [(fnamelen-1)];
 
     for(int i=0; i<fnamelen && fname[i] != '.'; ++i){   //code for this doesnt work with no file extension, it adds random characters to the end?
-        printf("%c\n", fname[i]);
         basename[i] = fname[i];
-        printf("%c\n", basename[i]);
     }
-    printf("%s", basename);
 
     if(input == "-D"){
 
@@ -75,13 +72,11 @@ void cryptoMagic (char input[], char fname[]){
         char fext[] = ".crp";   //the file extension we are going to use is ".crp"
         
         strcat(basename, fext); //makes the encrypted filename ex. "filebase.crp" and stores it in basename
-        printf("filename: %s\n", basename);
 
         encrypted = fopen(basename,"w+"); //opens a new file to write the encrypted message to 
 
         //Reads one line at a time from a file and encrypts it
         while(fgets(line, 120, (FILE*)fp)){
-            printf("%s", line);
             encrypt(line, basename);
         }
     } 
