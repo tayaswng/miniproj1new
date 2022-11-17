@@ -28,6 +28,7 @@ void encrypt(char original[120], char *writefile){
         if (outChar<32){
             outChar = (outChar-32)+144;
         }
+        
         arr[i] = outChar;
         if(arr[i] == 106){
             printf("newline\n");
@@ -52,7 +53,7 @@ void cryptoMagic (char input[], char fname[]){
     size_t fnamelen = strlen(fname); //length of user's file name
     char basename [(fnamelen-1)];
 
-    for(int i=0; i<fnamelen && fname[i] != '.'; ++i){
+    for(int i=0; i<fnamelen && fname[i] != '.'; ++i){   //code for this doesnt work with no file extension, it adds random characters to the end?
         printf("%c\n", fname[i]);
         basename[i] = fname[i];
         printf("%c\n", basename[i]);
@@ -61,15 +62,10 @@ void cryptoMagic (char input[], char fname[]){
 
     if(input == "-D"){
 
+        //add decrypt function 
         printf("decrypt");
 
-//change this
 
-
-        /*fp = fopen(fname,"r");
-        fgets(line, 255, (FILE*)fp);
-    
-        encrypt(line, encrypted); */
     }
 
     else{
