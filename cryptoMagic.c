@@ -34,7 +34,7 @@ void encrypt(char original[120], char *writefile){
         if(arr[i] == 106){
             fputs("\n", fp);
         }
-        
+
         else{
             fprintf(fp, "%2X", outChar);
         }
@@ -51,7 +51,7 @@ void cryptoMagic (char input[], char fname[]){
     FILE *fp;   //pointer to the file
     FILE *encrypted; //pointer to encrypted file
     size_t fnamelen = strlen(fname); //length of user's file name
-    char basename [(fnamelen-1)];
+    char basename [(fnamelen)];
 
     for(int i=0; i<fnamelen && fname[i] != '.'; ++i){   //code for this doesnt work with no file extension, it adds random characters to the end?
         basename[i] = fname[i];
